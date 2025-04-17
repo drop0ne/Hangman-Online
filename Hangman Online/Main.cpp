@@ -1,6 +1,9 @@
 #include "PCH.h"
+// Libcurl for HTTP requests
 
-int main()
+
+
+int wmain()
 {
 	std::cout << "Welcome to Hangman!" << std::endl;
 	// Initialize game components here

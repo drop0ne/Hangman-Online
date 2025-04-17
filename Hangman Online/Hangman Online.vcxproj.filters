@@ -56,5 +56,49 @@
     <ClInclude Include="PCH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="curl\curl.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\curlver.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\easy.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\header.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\mprintf.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\multi.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\options.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\stdcheaders.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\system.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\typecheck-gcc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\urlapi.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curl\websockets.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="curl\Makefile.am">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="curl\Makefile.in">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

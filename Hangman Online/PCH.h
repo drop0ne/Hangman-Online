@@ -26,3 +26,5 @@
 #include <thread>
 
 #include <curl/curl.h> // Libcurl for HTTP requests
+#include <nlohmann/json.hpp> // JSON library for parsing responses
+using json = nlohmann::json;

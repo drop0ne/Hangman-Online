@@ -5,7 +5,8 @@
 
 int wmain()
 {
-	std::cout << "Welcome to Hangman!" << std::endl;
-	// Initialize game components here
-	return 0;
+    json j;
+    j["key"] = "value";
+    std::cout << j.dump(4) << std::endl;
+    return 0;	return 0;
 } // End of main.cpp

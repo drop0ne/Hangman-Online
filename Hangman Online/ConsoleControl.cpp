@@ -6,7 +6,7 @@ void ConsoleControl::clearScreen()
 	try
 	{
 		HANDLE hConsole = getConsoleHandle();
-		auto csbi = GetScreenBufferInfo(hConsole);
+		auto csbi = getScreenBufferInfo(hConsole);
 		DWORD cellCount = static_cast<DWORD>(csbi.dwSize.X * csbi.dwSize.Y);
 		COORD homeCoords = { 0, 0 };
 
@@ -38,17 +38,36 @@ HANDLE ConsoleControl::getConsoleHandle()
 
 CONSOLE_SCREEN_BUFFER_INFO ConsoleControl::getScreenBufferInfo(HANDLE hConsole)
 {
-	return CONSOLE_SCREEN_BUFFER_INFO();
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
+	{
+		throw std::runtime_error("GetConsoleScreenBufferInfo failed");
+	}
+	return csbi;
 }
 
 void ConsoleControl::fillOutputCharacter(HANDLE hConsole, TCHAR ch, DWORD length, COORD coord)
 {
+	DWORD written = 0;
+	if (!FillConsoleOutputCharacter(hConsole, ch, length, coord, &written))
+	{
+		throw std::runtime_error("FillConsoleOutputCharacter failed");
+	}
 }
 
 void ConsoleControl::fillOutputAttribute(HANDLE hConsole, WORD attributes, DWORD length, COORD coord)
 {
+	DWORD written = 0;
+	if (!FillConsoleOutputAttribute(hConsole, attributes, length, coord, &written))
+	{
+		throw std::runtime_error("FillConsoleOutputAttribute failed");
+	}
 }
 
 void ConsoleControl::setCursorPosition(HANDLE hConsole, COORD coord)
 {
+	if (!SetConsoleCursorPosition(hConsole, coord))
+	{
+		throw std::runtime_error("SetConsoleCursorPosition failed");
+	}
 }

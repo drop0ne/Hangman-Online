@@ -9,6 +9,7 @@
 #endif
 
 // Standard headers
+#include <stdexcept>
 #include <windows.h>
 #include <tchar.h>
 #include <cwctype>

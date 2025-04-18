@@ -25,6 +25,8 @@
 #include <map>
 #include <chrono>
 #include <thread>
+#include <cctype>
+#include <algorithm>
 
 #include <curl/curl.h> // Libcurl for HTTP requests
 #include <nlohmann/json.hpp> // JSON library for parsing responses

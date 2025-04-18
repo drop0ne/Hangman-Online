@@ -2,7 +2,6 @@
 // Libcurl for HTTP requests
 
 
-
 int wmain()
 {
     json j;

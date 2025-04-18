@@ -1,6 +1,7 @@
 // ConsoleControl.h
 #pragma once
 #include "PCH.h"
+
 /**
  * @brief Utility class for controlling console screen behavior.
  *
@@ -10,6 +11,15 @@
  */
 class ConsoleControl {
 public:
+    // Color constants (could map to DWORD values or custom enum)
+    enum class Color { DEFAULT, RED, GREEN, BLUE, YELLOW, WHITE, BLACK };
+
+    // Set text (foreground) color
+    static void setTextColor(Color color);
+
+    // Set background color
+    static void setBackgroundColor(Color color);
+
     /**
      * @brief Clears the entire console screen and resets the cursor
      *        to the top-left corner.
@@ -22,7 +32,6 @@ public:
      */
     static void clearScreen();
 
-private:
     /**
      * @brief Retrieves the handle to the console output.
      * @return A valid HANDLE to standard output.
@@ -65,4 +74,8 @@ private:
      * @throws std::runtime_error if SetConsoleCursorPosition fails.
      */
     static void setCursorPosition(HANDLE hConsole, COORD coord);
+
+private:
+    // Helper to convert Color enum to console color attributes
+    static WORD getColorAttributes(Color color);
 };

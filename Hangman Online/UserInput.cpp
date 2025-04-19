@@ -42,12 +42,14 @@ int UserInput::getIntInRange(int min, int max, const std::string& prompt) {
             std::string errorMessage = "Invalid number: " + std::string(e.what()) + " (Input: '" + line + "')";
             logError(errorMessage);
             std::cout << "Invalid input. Please enter a valid number.\n";
+            continue;  // Retry input
         }
         catch (const std::out_of_range& e) {
             // Log error and show user-friendly message
             std::string errorMessage = "Number out of range: " + std::string(e.what()) + " (Input: '" + line + "')";
             logError(errorMessage);
             std::cout << "Input number out of range. Please enter a number between " << min << " and " << max << ".\n";
+            continue;  // Retry input
         }
 
         // Ensure the number is within the expected range
@@ -55,7 +57,7 @@ int UserInput::getIntInRange(int min, int max, const std::string& prompt) {
             std::string errorMessage = "Input value out of range: " + std::to_string(value) + " (Expected range: " + std::to_string(min) + " to " + std::to_string(max) + ")";
             logError(errorMessage);
             std::cout << "Please enter a number between " << min << " and " << max << ".\n";
-            continue;
+            continue;  // Retry input
         }
 
         // Successfully validated, return the value
@@ -73,6 +75,8 @@ char UserInput::getChar(const std::string& prompt, const std::string& validChars
                 return input;
             }
             else {
+                std::string errorMessage = "Invalid character input: '" + std::string(1, input) + "' (Valid chars: " + validChars + ")";
+                logError(errorMessage);
                 std::cout << "Please enter a valid character from the following: " << validChars << "\n";
             }
         }
@@ -80,6 +84,7 @@ char UserInput::getChar(const std::string& prompt, const std::string& validChars
             std::cin.clear(); // Clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the invalid input
             std::cout << "Invalid input. Please try again.\n";
+            logError("Invalid character input detected (non-character input).");
         }
     }
 }
@@ -91,6 +96,13 @@ std::string UserInput::getLine(const std::string& prompt) {
 
     // Optional: trim the input
     input = trim(input);
+
+    // Verify that the line is not empty
+    if (input.empty()) {
+        logError("Empty line input detected.");
+        std::cout << "Input cannot be empty. Please try again.\n";
+        return getLine(prompt); // Retry if empty input
+    }
 
     return input;
 }

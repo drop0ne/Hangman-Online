@@ -27,6 +27,8 @@
 #include <thread>
 #include <cctype>
 #include <algorithm>
+#include <ctime>
+
 
 #include <curl/curl.h> // Libcurl for HTTP requests
 #include <nlohmann/json.hpp> // JSON library for parsing responses

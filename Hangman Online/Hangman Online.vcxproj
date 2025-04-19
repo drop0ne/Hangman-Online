@@ -209,6 +209,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PCH.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PCH.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -270,6 +271,7 @@
     <ClInclude Include="curl\websockets.h" />
     <ClInclude Include="DictionaryManager.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="PCH.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="UserInput.h" />

@@ -112,7 +112,7 @@ std::string DictionaryManager::fetchWordsFromAPI(int count) {
 }
 
 // writeCallback: This is a helper function used by CURL to store the API response data.
-size_t writeCallback(void* contents, size_t size, size_t nmemb, std::string* userData) {
+size_t DictionaryManager::writeCallback(void* contents, size_t size, size_t nmemb, std::string* userData) {
     userData->append((char*)contents, size * nmemb);
     return size * nmemb;
 }

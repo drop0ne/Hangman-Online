@@ -41,6 +41,9 @@ private:
     // fetchWordsFromAPI: Makes an API call to Wordnik to fetch a specified number of random words.
     std::string fetchWordsFromAPI(int count);
 
+	// writeCallback: A helper function used by CURL to store the API response data.
+	static size_t writeCallback(void* contents, size_t size, size_t nmemb, std::string* userData);
+
     // checkAndLoadAPIKey: Checks if the API key file exists and loads the API key. If it's missing or invalid, it creates the file with instructions.
     void checkAndLoadAPIKey();
 };

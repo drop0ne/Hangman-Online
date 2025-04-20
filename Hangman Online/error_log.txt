@@ -1,2 +1,3 @@
 2025-04-19 21:25:35 [INFO] Initialized with wordLimit=50
 2025-04-19 21:26:07 [INFO] Exiting game loop
+2025-04-19 21:33:46 [INFO] Initialized with wordLimit=5

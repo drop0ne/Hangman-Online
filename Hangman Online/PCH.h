@@ -1,5 +1,4 @@
-// PCH.h � list your stable headers here
-#pragma once
+﻿#pragma once
 
 #ifndef UNICODE
 #define UNICODE
@@ -12,7 +11,6 @@
 #include <stdexcept>
 #include <windows.h>
 #include <tchar.h>
-#include <cwctype>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -25,26 +23,39 @@
 #include <map>
 #include <chrono>
 #include <thread>
-#include <cctype>
 #include <algorithm>
 #include <iomanip>
 
-
-#include <curl/curl.h> // Libcurl for HTTP requests
-#include <nlohmann/json.hpp> // JSON library for parsing responses
+// Libcurl and JSON (needed by DictionaryManager.cpp)
+#include <curl/curl.h>
+#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-// Global Helper functions for string conversion
-std::wstring utf8_to_wide(const std::string& str) {
-    int len = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, nullptr, 0);
-    std::wstring wideStr(len, 0);
-    MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, &wideStr[0], len);
-    return wideStr;
+// UTF‑8 / wide‑string conversions
+static std::string wideToUtf8(const std::wstring& wstr) {
+    if (wstr.empty()) return {};
+    int sizeNeeded = WideCharToMultiByte(
+        CP_UTF8, 0,
+        wstr.data(), (int)wstr.size(),
+        nullptr, 0, nullptr, nullptr);
+    std::string result(sizeNeeded, 0);
+    WideCharToMultiByte(
+        CP_UTF8, 0,
+        wstr.data(), (int)wstr.size(),
+        &result[0], sizeNeeded, nullptr, nullptr);
+    return result;
 }
 
-std::string wide_to_utf8(const std::wstring& wstr) {
-    int len = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
-    std::string str(len, 0);
-    WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &str[0], len, nullptr, nullptr);
-    return str;
+static std::wstring utf8ToWide(const std::string& str) {
+    if (str.empty()) return {};
+    int sizeNeeded = MultiByteToWideChar(
+        CP_UTF8, 0,
+        str.data(), (int)str.size(),
+        nullptr, 0);
+    std::wstring result(sizeNeeded, 0);
+    MultiByteToWideChar(
+        CP_UTF8, 0,
+        str.data(), (int)str.size(),
+        &result[0], sizeNeeded);
+    return result;
 }

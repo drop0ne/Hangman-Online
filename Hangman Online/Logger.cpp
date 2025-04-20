@@ -1,13 +1,17 @@
+﻿
+//------------------------------------------------------------------------------
+// Logger.cpp
+//------------------------------------------------------------------------------
+// Logger.cpp
 #include "PCH.h"
 #include "Logger.h"
 
-
 void Logger::logError(const std::string& message) {
-	log("ERROR", message);
+    log("ERROR", message);
 }
 
 void Logger::logInfo(const std::string& message) {
-	log("INFO", message);
+    log("INFO", message);
 }
 
 void Logger::log(const std::string& level, const std::string& message) {
@@ -17,12 +21,19 @@ void Logger::log(const std::string& level, const std::string& message) {
         return;
     }
 
-    // Get the current time using std::chrono
+    // Get current system time
     auto now = std::chrono::system_clock::now();
+    auto t_c = std::chrono::system_clock::to_time_t(now);
 
-    // Get epoch time (seconds since epoch)
-    auto epoch_time = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+    // Use the secure localtime_s variant
+    std::tm tm_buf;
+    if (localtime_s(&tm_buf, &t_c) != 0) {
+        // Fallback: zero out on error
+        tm_buf = std::tm{};
+    }
 
-    // Write the log message with the epoch time
-    logFile << "Epoch Time: " << epoch_time << " [" << level << "] " << message << "\n";
+    // Format and write timestamp
+    logFile
+        << std::put_time(&tm_buf, "%F %T")
+        << " [" << level << "] " << message << "\n";
 }
